@@ -100,16 +100,16 @@ class TestLogCounterHandler:
 
 
 class TestStreamLogger:
-    def test_redirect(self):
-        logger = logging.getLogger("test")
-        logger.setLevel(logging.WARNING)
-        old_stdout = sys.stdout
+def test_redirect(self):
+     logger = logging.getLogger("test")
+     logger.setLevel(logging.WARNING)
+     old_stdout = sys.stdout
+    try:
         sys.stdout = StreamLogger(logger, logging.ERROR)
-
         with LogCapture() as log:
             print("test log msg")
         log.check(("test", "ERROR", "test log msg"))
-
+    finally:
         sys.stdout = old_stdout
 
 
